@@ -1,0 +1,34 @@
+{
+  "root": true,
+  "extends": [
+    "eslint:recommended",
+    "airbnb-base",
+    "plugin:vue/vue3-recommended"
+  ],
+  "env": {
+    "browser": true,
+    "es6": true
+  },
+  "rules": {
+    "object-curly-newline": ["error", { "multiline": true }],
+    "arrow-parens": ["error", "as-needed"],
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "vue/singleline-html-element-content-newline": "off",
+    "vue/max-attributes-per-line": ["error", {
+      "singleline": 3,
+      "multiline": 1
+    }],
+    "vue/html-closing-bracket-newline": ["error", {
+      "singleline": "never",
+      "multiline": "never"
+    }]
+  },
+  "settings": {
+    "import/resolver": {
+      "alias": {
+        "map": [["/@", "./src"]],
+        "extensions": [".js", ".json", ".vue"]
+      }
+    }
+  }
+}
