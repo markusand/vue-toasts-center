@@ -18,7 +18,39 @@ Include basic styles in your project js or (s)css entry point
 import 'vue-toasts-center/dist/style.css'
 ```
 
-Import ToastsCenter component and service methods
+Install as plugin and use injected methods
+
+```js
+/* main.js */
+import { createApp } from 'vue';
+import App from './App.vue';
+import Toasts from 'vue-toasts-center';
+
+const app = createApp(App);
+app.use(Toasts, {
+  timeout: 5000,
+  closeable: true,
+});
+app.mount('#app');
+
+/* App.vue */
+<template>
+  <toasts-center />
+</template>
+
+<script>
+import { inject } from 'vue';
+
+export default {
+  setup() {
+    const toasts = inject('toasts');
+    toasts.showToast('Hello World!');
+  },
+};
+</script>
+```
+
+Or import component and methods locally
 
 ```html
 <template>

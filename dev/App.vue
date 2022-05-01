@@ -26,14 +26,13 @@
 </template>
 
 <script>
-import { reactive } from 'vue';
-import { ToastsCenter, showToast } from '../src';
+import { inject, reactive } from 'vue';
 
 export default {
   name: 'App',
-  components: { ToastsCenter },
   setup() {
-    const options = reactive({ timeout: 5000 });
+    const toasts = inject('toasts');
+    const options = reactive({});
 
     const onClick = (toast, context) => {
       context.warningToast(`Toast ${toast.id} clicked`, { closeable: true });
@@ -43,7 +42,7 @@ export default {
     };
 
     const openToast = (message, type) => {
-      showToast(message, { ...options, onClick, onClose, type });
+      toasts.showToast(message, { ...options, onClick, onClose, type });
     };
 
     return { options, openToast };
