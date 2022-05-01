@@ -1,19 +1,62 @@
-# vue-component-library
+# Vue Toasts Center
 
-Boilerplate to create a Vue 3 component library.
+Show notification toasts with messages for the user.
 
 ## Setup
 
-Create a new project from this template and clone it to your local machine.
+Install from npm
 
-Change the name of the project to something meaningful in the package.json file and install dependencies with `npm install`.
+```bash
+npm install vue-toasts-center
+```
 
-## Development
+## Usage
 
-Create youur component and set the export in `src/index.js`.
+Include basic styles in your project js or (s)css entry point
 
-Run `npm run dev` to start the development server with the App in `/dev` directory. Use this App to test your component.
+```js
+import 'vue-toasts-center/dist/style.css'
+```
 
-## Publish
+Import ToastsCenter component and service methods
 
-Change the version to publish and and run `npm publish` to publish your component to npm.
+```html
+<template>
+  <section>
+    <!-- Trigger the toast -->
+    <button @click="errorToast('Error!')">Error toast</button>
+
+    <!-- Add the Toasts Center -->
+    <tasks-wait />
+  </section>
+</template>
+
+<script>
+import { ToastsCenter, errorToast } from 'vue-toasts-center';
+
+export default {
+  name: 'App',
+  components: { ToastsCenter },
+  setup() {
+    return { errorToast };
+  },
+};
+```
+
+## Methods
+
+### showToast(message, options?)
+
+Show a toast with the given message. Optional options object can be passed to customize the toast behaviour.
+
+```js
+showToast('Hello World!', {
+  type: 'success',
+  timeout: 5000,
+  closeable: true,
+  onClick: (toast, { showToast }) => showToast(`Toast ${toast.id} clicked!`),
+  onClose: (toast, { errorToast }) => errorToast(`Toast ${toast.id} closed`),
+});
+```
+
+`successToast`, `errorToast`, `infoToast`, `warningToast` shortcuts methods to style different types of toasts without need to define the `type` attribute.
